@@ -1,0 +1,49 @@
+#homepage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  .app {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    .background-image {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      /* Additional background image styling */
+    }
+
+    .scattered-carousel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+
+      .carousel-image {
+        position: absolute;
+        max-width: 35vw;
+        opacity: 1;
+        /* Additional scattered image styling */
+      }
+    }
+  }
+
+  h1 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
