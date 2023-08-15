@@ -1,13 +1,14 @@
 import "./navbar.scss";
 import { NavLink } from "react-router-dom";
-const navbar = () => {
+const navbar = ({ onNavbarTagClick }) => {
   return (
     <div id="navbar" className="py-3">
       <div className="container">
-        <div class="row">
-          <div class="col">
+        <div className="row">
+          <div className="col">
             <div className="d-flex align-items-center justify-content-evenly">
               <NavLink
+                onClick={() => onNavbarTagClick('nowPlaying')}
                 to="/nowplaying"
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
@@ -16,7 +17,8 @@ const navbar = () => {
                 Now Playing
               </NavLink>
               <NavLink
-                to="/ethos"
+                onClick={() => onNavbarTagClick('ethos')}
+                to="#ethos"
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
@@ -24,7 +26,8 @@ const navbar = () => {
                 Ethos
               </NavLink>
               <NavLink
-                to="/contact"
+                onClick={() => onNavbarTagClick('contact')}
+                to="#contact"
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
