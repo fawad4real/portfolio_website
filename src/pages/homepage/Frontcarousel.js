@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 const Frontcarousel = () => {
   const imageURLsContext = require.context(
@@ -8,8 +8,36 @@ const Frontcarousel = () => {
   );
   const frontimageURLs = imageURLsContext.keys().map(imageURLsContext);
 
-  const imageWidth = 500; // Set your desired image width
-  const imageHeight = 500; // Set your desired image height
+  const [imageWidth, setImageWidth] = useState(100); // Default width
+  const [imageHeight, setImageHeight] = useState(100); // Default width
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+      console.log(screenWidth);
+
+      if (screenWidth <= 767) {
+        setImageWidth(150); // Mobile width
+        setImageHeight(150); // Mobile width
+      } else if (screenWidth <= 1023) {
+        setImageWidth(200); // Tablet width
+        setImageHeight(200); // Mobile width
+      } else if (screenWidth <= 1279) {
+        setImageWidth(300); // Large screen width
+        setImageHeight(300); // Mobile width
+      } else {
+        setImageWidth(500); // Extra large screen width
+        setImageHeight(500); // Mobile width
+      }
+    };
+
+    handleResize(); // Call initially to set the initial image width
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   function getRandomPositionleft() {
     const maxWidth = window.innerWidth / 2 - imageWidth; // Subtract image width
     const maxHeight = window.innerHeight - imageHeight; // Subtract image height

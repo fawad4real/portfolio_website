@@ -2,9 +2,9 @@ import "./navbar.scss";
 import { NavLink } from "react-router-dom";
 const navbar = ({ onNavbarTagClick }) => {
   return (
-    <div id="navbar" className="py-3">
-      <div className="container">
-        <div className="row">
+    <div id="navbar" className="py-3 h-100">
+      <div className="container  h-100">
+        <div className="row h-100 align-items-center flex-column">
           <div className="col">
             <div className="d-flex align-items-center justify-content-evenly">
               <NavLink
@@ -18,7 +18,7 @@ const navbar = ({ onNavbarTagClick }) => {
               </NavLink>
               <NavLink
                 onClick={() => onNavbarTagClick('ethos')}
-                to="#ethos"
+                to="ethos"
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 }
@@ -27,14 +27,21 @@ const navbar = ({ onNavbarTagClick }) => {
               </NavLink>
               <NavLink
                 onClick={() => onNavbarTagClick('contact')}
-                to="#contact"
-                className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "active" : ""
-                }
+                to="contact"
+                className="d-none d-md-block"
               >
                 Contact
               </NavLink>
             </div>
+          </div>
+          <div className="col d-flex justify-content-center align-items-end">
+          <NavLink
+                onClick={() => onNavbarTagClick('contact')}
+                to="contact"
+                className="d-md-none d-block"
+              >
+                Contact
+              </NavLink>
           </div>
         </div>
       </div>

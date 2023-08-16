@@ -4,7 +4,7 @@
   top: 0;
   width: 100vw;
   a {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
     position: relative;
     color: #ffffff;
@@ -29,6 +29,9 @@
     }
     &:hover::before {
       transform: scaleX(1);
+    }
+    @media only screen and (max-width: 768px) {
+      font-size: 1rem;
     }
   }
 }

@@ -1,86 +1,38 @@
 import React, { useState, useEffect } from "react";
 import "./homepage.scss";
-
+import Background from "./background";
+import { Link } from "react-router-dom";
+import Frontcarousel from "./Frontcarousel";
 const Homepage = ({ activeLink }) => {
   const [activeLinkCurrent, setActiveLinkCurrent] = useState(activeLink);
 
+
   useEffect(() => {
+    console.log('Active Link Coming From above: ', activeLink);
+    console.log('Active Link Below: ', activeLinkCurrent);
     setActiveLinkCurrent(activeLink);
-    console.log("2", activeLinkCurrent);
+    activeLink="homepage";
   }, [activeLink]);
 
-  const imageURLsContext = require.context(
-    "../../assets/images/carousel",
-    false,
-    /\.(png|jpg|jpeg)$/
-  );
-  const imageURLs = imageURLsContext.keys().map(imageURLsContext);
-  const frontimageURLs = imageURLsContext.keys().map(imageURLsContext);
   // console.warn("imageURLs", imageURLs);
 
-  const imageWidth = 500; // Set your desired image width
-  const imageHeight = 500; // Set your desired image height
-  function getRandomPositionleft() {
-    const maxWidth = window.innerWidth / 2 - imageWidth; // Subtract image width
-    const maxHeight = window.innerHeight - imageHeight; // Subtract image height
-
-    const x = Math.random() * maxWidth;
-    const y = Math.random() * maxHeight;
-
-    return { x, y };
-  }
-
-  function getRandomPositionright() {
-    const minWidth = window.innerWidth / 2;
-    const maxWidth = window.innerWidth - imageWidth; // Subtract image width
-    const maxHeight = window.innerHeight - imageHeight; // Subtract image height
-
-    const x = Math.random() * (maxWidth - minWidth) + minWidth;
-    const y = Math.random() * maxHeight;
-
-    return { x, y };
-  }
-
-  const [currentImageIndex, setCurrentImageIndex] = useState(2);
-  useEffect(() => {
-    const bginterval = setInterval(() => {
-      const newIndex = Math.floor(Math.random() * imageURLs.length);
-      setCurrentImageIndex(newIndex);
-    }, Math.floor(Math.random() * (8000 - 6000)) + 6000); // Random interval between 3 to 5 seconds
-
-    return () => clearInterval(bginterval); // Clear interval on component unmount
-  }, [currentImageIndex]);
-
-  const [frontcurrentImageIndex, setFrontCurrentImageIndex] = useState(5);
-  useEffect(() => {
-    const frontinterval = setInterval(() => {
-      const newIndex = Math.floor(Math.random() * frontimageURLs.length);
-      setFrontCurrentImageIndex(newIndex);
-    }, Math.floor(Math.random() * (8000 - 6000)) + 6000); // Random interval between 3 to 5 seconds
-
-    return () => clearInterval(frontinterval); // Clear interval on component unmount
-  }, [frontcurrentImageIndex]);
-
-  const currentImageStyle = {
-    backgroundImage: `url(${imageURLs[currentImageIndex]}), linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5))`,
-  };
-  useEffect(() => {
-    if (activeLinkCurrent === "homepage") {
-      console.log("activeLinkCurrent:", activeLinkCurrent);
-      const h1Element = document.getElementById("hiddenText");
-
-      function toggleVisibility() {
-        h1Element.style.display =
-          h1Element.style.display === "none" ? "block" : "none";
-      }
-
-      const timeset = setInterval(toggleVisibility, 9000);
-
-      return () => {
-        clearInterval(timeset);
-      };
+useEffect(() => {
+  if (activeLinkCurrent === "homepage") {
+    const h1Element = document.getElementById("hiddenText");
+    
+    function toggleVisibility() {
+      console.log("Toggling visibility");
+      h1Element.style.display = h1Element.style.display === "none" ? "block" : "none";
     }
-  },[]);
+
+    const timeset = setInterval(toggleVisibility, 9000);
+
+    return () => {
+      clearInterval(timeset);
+    };
+  }
+}, [activeLinkCurrent]); // Make sure to include activeLinkCurrent in the dependency array
+
   const textArray = [
     '"Codes within codes, subjectivities enfolded in ciphers, 45 revolutions per minute at 24 frames per second, more or less"',
     '"Cinema that replicates the power, beauty and alienation of Black Music"',
@@ -102,29 +54,15 @@ const Homepage = ({ activeLink }) => {
       return () => clearInterval(intervalId);
     }
   });
+  const handleClickContact = () => {
+    setActiveLinkCurrent("homepage");
+  };
   return (
     <div id="homepage">
       <div className="app">
-        <div className="background-image" style={currentImageStyle}></div>
-        <div className="front-carousel">
-          <img
-            src={frontimageURLs[frontcurrentImageIndex]}
-            style={{
-              position: "absolute",
-              left: `${getRandomPositionleft().x}px`,
-              top: `${getRandomPositionleft().y}px`,
-            }}
-          />
-          <img
-            src={frontimageURLs[frontcurrentImageIndex + 1]}
-            style={{
-              position: "absolute",
-              left: `${getRandomPositionright().x}px`,
-              top: `${getRandomPositionright().y}px`,
-            }}
-          />
-        </div>
-        {activeLinkCurrent === "homepage" && (
+        <Background />
+        <Frontcarousel />
+        {(activeLinkCurrent === "homepage" || '/') && (
           <div className="homepage">
             <h1 id="hiddenText" className="tneg-logo">
               <svg
@@ -145,18 +83,18 @@ const Homepage = ({ activeLink }) => {
           </div>
         )}
         {activeLinkCurrent == "ethos" && (
-          <div id="ethos" className="ethos">
+          <Link to="/" id="ethos" className="ethos">
             <h2>
               TNEG is a motion picture studio whose goal is to create a black
               cinema as culturally, socially, and economically central to the
               21st century as was black music to the 20th century.
             </h2>
-          </div>
+          </Link>
         )}
         {activeLinkCurrent == "contact" && (
-          <div id="contact" className="contactUs">
-            <a href="mailto:info@tnge.us">info@tnge.us</a>
-          </div>
+            <Link to="/" onClick={handleClickContact} id="contact" className="contactUs">
+                <a href="mailto:info@tnge.us">info@tnge.us</a>
+            </Link>
         )}
       </div>
     </div>
