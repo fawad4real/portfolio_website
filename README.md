@@ -25,10 +25,16 @@ A React Project
 
 1. Clone the repository.
 
-   git clone https://github.com/fawad4real/portfolio_website.git
-   npm install  - to install node modules
-   npm start    - to start the project in development
-   npm build    - to build the project to deploy on server
+   -git clone https://github.com/fawad4real/portfolio_website.git
+
+2. Install node modules   
+   -npm install 
+
+3. Start the project in development     
+   -npm start
+
+4. Build the project to deploy on server   
+   -npm build    
 
 Features
 List the key features or functionalities of your project.
