@@ -1,37 +1,40 @@
 import React, { useState, useEffect } from "react";
 import "./homepage.scss";
 import Background from "./background";
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import Frontcarousel from "./Frontcarousel";
+import Contact from "./Contact";
+import Ethos from "./Ethos";
+import { NowPlaying } from "./NowPlaying";
 const Homepage = ({ activeLink }) => {
   const [activeLinkCurrent, setActiveLinkCurrent] = useState(activeLink);
 
-
   useEffect(() => {
-    console.log('Active Link Coming From above: ', activeLink);
-    console.log('Active Link Below: ', activeLinkCurrent);
+    console.log("Active Link Coming From above: ", activeLink);
+    console.log("Active Link Below: ", activeLinkCurrent);
     setActiveLinkCurrent(activeLink);
-    activeLink="homepage";
+    activeLink = "homepage";
   }, [activeLink]);
 
   // console.warn("imageURLs", imageURLs);
 
-useEffect(() => {
-  if (activeLinkCurrent === "homepage") {
-    const h1Element = document.getElementById("hiddenText");
-    
-    function toggleVisibility() {
-      console.log("Toggling visibility");
-      h1Element.style.display = h1Element.style.display === "none" ? "block" : "none";
+  useEffect(() => {
+    if (activeLinkCurrent === "homepage") {
+      const h1Element = document.getElementById("hiddenText");
+
+      function toggleVisibility() {
+        console.log("Toggling visibility");
+        h1Element.style.display =
+          h1Element.style.display === "none" ? "block" : "none";
+      }
+
+      const timeset = setInterval(toggleVisibility, 9000);
+
+      return () => {
+        clearInterval(timeset);
+      };
     }
-
-    const timeset = setInterval(toggleVisibility, 9000);
-
-    return () => {
-      clearInterval(timeset);
-    };
-  }
-}, [activeLinkCurrent]); // Make sure to include activeLinkCurrent in the dependency array
+  }, [activeLinkCurrent]); // Make sure to include activeLinkCurrent in the dependency array
 
   const textArray = [
     '"Codes within codes, subjectivities enfolded in ciphers, 45 revolutions per minute at 24 frames per second, more or less"',
@@ -62,7 +65,7 @@ useEffect(() => {
       <div className="app">
         <Background />
         <Frontcarousel />
-        {(activeLinkCurrent === "homepage" || '/') && (
+        {(activeLinkCurrent === "homepage" || "/") && (
           <div className="homepage">
             <h1 id="hiddenText" className="tneg-logo">
               <svg
@@ -82,20 +85,11 @@ useEffect(() => {
             </div>
           </div>
         )}
-        {activeLinkCurrent == "ethos" && (
-          <Link to="/" id="ethos" className="ethos">
-            <h2>
-              TNEG is a motion picture studio whose goal is to create a black
-              cinema as culturally, socially, and economically central to the
-              21st century as was black music to the 20th century.
-            </h2>
-          </Link>
-        )}
-        {activeLinkCurrent == "contact" && (
-            <Link to="/" onClick={handleClickContact} id="contact" className="contactUs">
-                <a href="mailto:info@tnge.us">info@tnge.us</a>
-            </Link>
-        )}
+        <Routes>
+          <Route path="/nowplaying" element={<NowPlaying />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/ethos" element={<Ethos />} />
+        </Routes>
       </div>
     </div>
   );

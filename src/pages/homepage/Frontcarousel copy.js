@@ -68,34 +68,27 @@ const Frontcarousel = () => {
     return { x, y };
   }
 
-  const [frontcurrentImageIndexLeft, setFrontCurrentImageIndexLeft] = useState(5);
-  const [frontcurrentImageIndexRight, setFrontCurrentImageIndexRight] = useState(6);
+  const [frontcurrentImageIndex, setFrontCurrentImageIndex] = useState(5);
   const [positionLeft, setPositionLeft] = useState(getRandomPositionleft());
   const [positionRight, setPositionRight] = useState(getRandomPositionright());
 
   useEffect(() => {
-    const frontintervalLeft = setInterval(() => {
+    const frontinterval = setInterval(() => {
       const newIndex = Math.floor(Math.random() * frontimageURLs.length);
-      setFrontCurrentImageIndexLeft(newIndex);
+      setFrontCurrentImageIndex(newIndex);
+
+      // Update positions when the image changes
       setPositionLeft(getRandomPositionleft());
-    }, Math.floor(Math.random() * (8000 - 6000)) + 6000);
-
-    const frontintervalRight = setInterval(() => {
-      const newIndex = Math.floor(Math.random() * frontimageURLs.length);
-      setFrontCurrentImageIndexRight(newIndex);
       setPositionRight(getRandomPositionright());
-    }, Math.floor(Math.random() * (7000 - 5000)) + 5000);
+    }, Math.floor(Math.random() * (8000 - 6000)) + 6000); // Random interval between 3 to 5 seconds
 
-    return () => {
-      clearInterval(frontintervalLeft);
-      clearInterval(frontintervalRight);
-    };
-  }, []);
+    return () => clearInterval(frontinterval); // Clear interval on component unmount
+  }, [frontcurrentImageIndex]);
 
   return (
     <div className="front-carousel">
       <img
-        src={frontimageURLs[frontcurrentImageIndexLeft]}
+        src={frontimageURLs[frontcurrentImageIndex]}
         style={{
           position: "absolute",
           left: `${positionLeft.x}px`,
@@ -103,7 +96,7 @@ const Frontcarousel = () => {
         }}
       />
       <img
-        src={frontimageURLs[frontcurrentImageIndexRight]}
+        src={frontimageURLs[frontcurrentImageIndex + 1]}
         style={{
           position: "absolute",
           left: `${positionRight.x}px`,
