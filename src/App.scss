@@ -45,13 +45,18 @@ p {
     }
   }
 }
+.contactUsWrapper{
+  
+  background-color: rgb(0, 0, 0);
+}
 
 .ethos {
   h2 {
     font-size: 2rem;
-    color: white;
+    color: white;    
+    padding: 25%;
     @media only screen and (max-width: 768px) {
-      width: 80%;
+      width: 100%;
       font-size: 1rem !important;
     }
   }

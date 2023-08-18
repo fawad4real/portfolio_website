@@ -11,8 +11,8 @@ const Homepage = ({ activeLink }) => {
   const [activeLinkCurrent, setActiveLinkCurrent] = useState(activeLink);
 
   useEffect(() => {
-    console.log("Active Link Coming From above: ", activeLink);
-    console.log("Active Link Below: ", activeLinkCurrent);
+   // console.log("Active Link Coming From above: ", activeLink);
+    //console.log("Active Link Below: ", activeLinkCurrent);
     setActiveLinkCurrent(activeLink);
     activeLink = "homepage";
   }, [activeLink]);
@@ -24,7 +24,7 @@ const Homepage = ({ activeLink }) => {
       const imgRef = document.getElementById("hiddenText");
 
       function toggleVisibility() {
-        console.log("Toggling visibility");
+        //console.log("Toggling visibility");
         imgRef.style.display =
           imgRef.style.display === "none" ? "block" : "none";
       }
@@ -75,7 +75,7 @@ const Homepage = ({ activeLink }) => {
           </div>
         )}
         <Routes>
-          <Route path="/nowplaying" element={<NowPlaying />} />
+          <Route path="/subscribe" element={<NowPlaying />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/ethos" element={<Ethos />} />
         </Routes>

@@ -14,7 +14,7 @@ const Frontcarousel = () => {
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
-      console.log(screenWidth);
+      //console.log(screenWidth);
 
       if (screenWidth <= 767) {
         setImageWidth(150); // Mobile width
@@ -54,22 +54,22 @@ const Frontcarousel = () => {
     const minWidth = window.innerWidth / 2;
     const maxWidth = window.innerWidth - imageWidth; // Subtract image width
     const maxHeight = window.innerHeight - imageHeight; // Subtract image height
-    console.warn('imageWidth: ',imageWidth);
-    console.warn('imageHeight: ',imageHeight);
-    console.warn('minWidth: ',minWidth);
-    console.warn('maxWidth: ',maxWidth);
-    console.warn('maxHeight: ',maxHeight);
+    //console.warn('imageWidth: ',imageWidth);
+    //console.warn('imageHeight: ',imageHeight);
+    //console.warn('minWidth: ',minWidth);
+    //console.warn('maxWidth: ',maxWidth);
+    //console.warn('maxHeight: ',maxHeight);
     
     const x = parseInt(Math.random() * (maxWidth - minWidth) + minWidth);
     const y = parseInt(Math.random() * maxHeight);
-    console.warn('x: ',x);
-    console.warn('y: ',y);
+    //console.warn('x: ',x);
+    //console.warn('y: ',y);
 
     return { x, y };
   }
 
   const [frontcurrentImageIndexLeft, setFrontCurrentImageIndexLeft] = useState(5);
-  const [frontcurrentImageIndexRight, setFrontCurrentImageIndexRight] = useState(6);
+  const [frontcurrentImageIndexRight, setFrontCurrentImageIndexRight] = useState(5);
   const [positionLeft, setPositionLeft] = useState(getRandomPositionleft());
   const [positionRight, setPositionRight] = useState(getRandomPositionright());
 
@@ -103,7 +103,7 @@ const Frontcarousel = () => {
         }}
       />
       <img
-        src={frontimageURLs[frontcurrentImageIndexRight]}
+        src={frontimageURLs[frontcurrentImageIndexRight + 1]}
         style={{
           position: "absolute",
           left: `${positionRight.x}px`,

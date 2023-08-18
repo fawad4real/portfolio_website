@@ -7,7 +7,7 @@ const Background = () => {
     /\.(png|jpg|jpeg)$/
   );
   const imageURLs = imageURLsContext.keys().map(imageURLsContext);
-  const [currentImageIndex, setCurrentImageIndex] = useState(2);
+  const [currentImageIndex, setCurrentImageIndex] = useState(1);
   useEffect(() => {
     const bginterval = setInterval(() => {
       const newIndex = Math.floor(Math.random() * imageURLs.length);
