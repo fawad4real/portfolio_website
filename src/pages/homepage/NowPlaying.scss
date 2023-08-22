@@ -42,6 +42,9 @@
     border: 1px solid #ffffff;
     background: black;
     color: white;
+    @media (max-width: 767px) {
+      height: 3rem;
+    }
   }
   #mc_embed_signup_scroll {
     display: flex;
@@ -74,6 +77,9 @@
     #mc_embed_signup .mc-field-group input {
       display: inline-block;
     }
+    @media (max-width: 767px) {
+      width: 65% !important;
+    }
   }
   .optionalParent {
     display: inline-block;
@@ -93,6 +99,9 @@
     transition: transform 0.3s ease-in-out;
     &:hover {
       transform: scale(1.05);
+    }
+    @media (max-width: 767px) {
+      height: 3rem;
     }
   }
 }

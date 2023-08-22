@@ -38,32 +38,59 @@ const Frontcarousel = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  });
+  }, [imageHeight, imageWidth]);
+
+
   function getRandomPositionleft() {
-    const maxWidth = window.innerWidth / 2 - imageWidth; // Subtract image width
-    const maxHeight = window.innerHeight - imageHeight; // Subtract image height
 
-    const x = Math.random() * maxWidth;
-    const y = Math.random() * maxHeight;
+    let maxWidth = 0;
+    let maxHeight = 0;
+    if (window.innerWidth <= 768) {
+      maxWidth = window.innerWidth - imageWidth; // Subtract image width
+      maxHeight = (window.innerHeight / 2) - imageHeight; // Subtract image height
+    }
+    else {
+      maxWidth = window.innerWidth / 2 - imageWidth; // Subtract image width
+      maxHeight = window.innerHeight - imageHeight; // Subtract image height
+    }
 
+    const x = Math.floor(Math.random() * (maxWidth -  0 ) + 0);
+    const y = Math.floor(Math.random() * (maxHeight - 0 ) + 0);
+    console.log('maxHeight Left: ', maxHeight);
+    console.log('Left y:  ', y);
+    console.log('Left X:  ', x);
     return { x, y };
   }
 
   function getRandomPositionright() {
-    
-    const minWidth = window.innerWidth / 2;
-    const maxWidth = window.innerWidth - imageWidth; // Subtract image width
-    const maxHeight = window.innerHeight - imageHeight; // Subtract image height
+    let maxWidth = 0;
+    let minWidth = 0;
+    let minHeight = 0;
+    let maxHeight = 0;
+
+    if (window.innerWidth <= 768) {
+      minWidth = window.innerWidth;
+      maxWidth = window.innerWidth - imageWidth; // Subtract image width
+      minHeight = (window.innerHeight / 2) - imageHeight; // Subtract image height
+      maxHeight = (window.innerHeight) - imageHeight; // Subtract image height
+    }
+    else {
+      minWidth = window.innerWidth / 2;
+      maxWidth = window.innerWidth - imageWidth; // Subtract image width
+      maxHeight = window.innerHeight - imageHeight; // Subtract image height
+    }
+
     //console.warn('imageWidth: ',imageWidth);
     //console.warn('imageHeight: ',imageHeight);
     //console.warn('minWidth: ',minWidth);
     //console.warn('maxWidth: ',maxWidth);
-    //console.warn('maxHeight: ',maxHeight);
-    
-    const x = parseInt(Math.random() * (maxWidth - minWidth) + minWidth);
-    const y = parseInt(Math.random() * maxHeight);
+    console.log('maxHeight Right: ', maxHeight);
+
+    const x = Math.floor(parseInt(Math.random() * (maxWidth - minWidth) + minWidth));
+    const y = Math.floor(parseInt(Math.random() * (maxHeight - minHeight) + minHeight));
     //console.warn('x: ',x);
-    //console.warn('y: ',y);
+    console.log('Right y:  ', y);
+    console.log('Right X:  ', x);
 
     return { x, y };
   }
@@ -79,7 +106,12 @@ const Frontcarousel = () => {
       setFrontCurrentImageIndexLeft(newIndex);
       setPositionLeft(getRandomPositionleft());
     }, Math.floor(Math.random() * (8000 - 6000)) + 6000);
+    return () => {
+      clearInterval(frontintervalLeft);
+    };
+  }, [frontcurrentImageIndexLeft]);
 
+  useEffect(() => {
     const frontintervalRight = setInterval(() => {
       const newIndex = Math.floor(Math.random() * frontimageURLs.length);
       setFrontCurrentImageIndexRight(newIndex);
@@ -87,14 +119,14 @@ const Frontcarousel = () => {
     }, Math.floor(Math.random() * (7000 - 5000)) + 5000);
 
     return () => {
-      clearInterval(frontintervalLeft);
       clearInterval(frontintervalRight);
     };
-  }, []);
+  }, [frontcurrentImageIndexRight]);
 
   return (
     <div className="front-carousel">
       <img
+        alt="1"
         src={frontimageURLs[frontcurrentImageIndexLeft]}
         style={{
           position: "absolute",
@@ -103,6 +135,7 @@ const Frontcarousel = () => {
         }}
       />
       <img
+        alt="2"
         src={frontimageURLs[frontcurrentImageIndexRight + 1]}
         style={{
           position: "absolute",

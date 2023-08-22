@@ -14,7 +14,7 @@ const Frontcarousel = () => {
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
-      console.log(screenWidth);
+      //console.log(screenWidth);
 
       if (screenWidth <= 767) {
         setImageWidth(150); // Mobile width
@@ -54,41 +54,48 @@ const Frontcarousel = () => {
     const minWidth = window.innerWidth / 2;
     const maxWidth = window.innerWidth - imageWidth; // Subtract image width
     const maxHeight = window.innerHeight - imageHeight; // Subtract image height
-    console.warn('imageWidth: ',imageWidth);
-    console.warn('imageHeight: ',imageHeight);
-    console.warn('minWidth: ',minWidth);
-    console.warn('maxWidth: ',maxWidth);
-    console.warn('maxHeight: ',maxHeight);
+    //console.warn('imageWidth: ',imageWidth);
+    //console.warn('imageHeight: ',imageHeight);
+    //console.warn('minWidth: ',minWidth);
+    //console.warn('maxWidth: ',maxWidth);
+    //console.warn('maxHeight: ',maxHeight);
     
     const x = parseInt(Math.random() * (maxWidth - minWidth) + minWidth);
     const y = parseInt(Math.random() * maxHeight);
-    console.warn('x: ',x);
-    console.warn('y: ',y);
+    //console.warn('x: ',x);
+    //console.warn('y: ',y);
 
     return { x, y };
   }
 
-  const [frontcurrentImageIndex, setFrontCurrentImageIndex] = useState(5);
+  const [frontcurrentImageIndexLeft, setFrontCurrentImageIndexLeft] = useState(5);
+  const [frontcurrentImageIndexRight, setFrontCurrentImageIndexRight] = useState(5);
   const [positionLeft, setPositionLeft] = useState(getRandomPositionleft());
   const [positionRight, setPositionRight] = useState(getRandomPositionright());
 
   useEffect(() => {
-    const frontinterval = setInterval(() => {
+    const frontintervalLeft = setInterval(() => {
       const newIndex = Math.floor(Math.random() * frontimageURLs.length);
-      setFrontCurrentImageIndex(newIndex);
-
-      // Update positions when the image changes
+      setFrontCurrentImageIndexLeft(newIndex);
       setPositionLeft(getRandomPositionleft());
-      setPositionRight(getRandomPositionright());
-    }, Math.floor(Math.random() * (8000 - 6000)) + 6000); // Random interval between 3 to 5 seconds
+    }, Math.floor(Math.random() * (8000 - 6000)) + 6000);
 
-    return () => clearInterval(frontinterval); // Clear interval on component unmount
-  }, [frontcurrentImageIndex]);
+    const frontintervalRight = setInterval(() => {
+      const newIndex = Math.floor(Math.random() * frontimageURLs.length);
+      setFrontCurrentImageIndexRight(newIndex);
+      setPositionRight(getRandomPositionright());
+    }, Math.floor(Math.random() * (7000 - 5000)) + 5000);
+
+    return () => {
+      clearInterval(frontintervalLeft);
+      clearInterval(frontintervalRight);
+    };
+  }, []);
 
   return (
     <div className="front-carousel">
       <img
-        src={frontimageURLs[frontcurrentImageIndex]}
+        src={frontimageURLs[frontcurrentImageIndexLeft]}
         style={{
           position: "absolute",
           left: `${positionLeft.x}px`,
@@ -96,7 +103,7 @@ const Frontcarousel = () => {
         }}
       />
       <img
-        src={frontimageURLs[frontcurrentImageIndex + 1]}
+        src={frontimageURLs[frontcurrentImageIndexRight + 1]}
         style={{
           position: "absolute",
           left: `${positionRight.x}px`,

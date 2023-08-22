@@ -9,13 +9,13 @@ function App() {
     setActiveLink(link);
   };
   return (
-    <React.StrictMode>
+    // <React.StrictMode>
       <div className="App">
         <Navbar onNavbarTagClick={handleNavbarTagClick} />
         <Homepage activeLink={activeLink} />{" "}
         {/* Change prop name to activeLink */}
       </div>
-    </React.StrictMode>
+    // </React.StrictMode>
   );
 }
 
