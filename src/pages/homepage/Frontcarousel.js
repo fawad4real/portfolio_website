@@ -8,8 +8,8 @@ const Frontcarousel = () => {
   );
   const frontimageURLs = imageURLsContext.keys().map(imageURLsContext);
 
-  const [imageWidth, setImageWidth] = useState(500); // Default width
-  const [imageHeight, setImageHeight] = useState(500); // Default width
+  const [imageWidth, setImageWidth] = useState(150); // Default width
+  const [imageHeight, setImageHeight] = useState(150); // Default width
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,25 +40,26 @@ const Frontcarousel = () => {
     };
   }, [imageHeight, imageWidth]);
 
-
   function getRandomPositionleft() {
-
     let maxWidth = 0;
     let maxHeight = 0;
     if (window.innerWidth <= 768) {
       maxWidth = window.innerWidth - imageWidth; // Subtract image width
-      maxHeight = (window.innerHeight / 2) - imageHeight; // Subtract image height
-    }
-    else {
+      maxHeight = window.innerHeight / 2 - imageHeight; // Subtract image height
+    } else {
       maxWidth = window.innerWidth / 2 - imageWidth; // Subtract image width
       maxHeight = window.innerHeight - imageHeight; // Subtract image height
     }
 
-    const x = Math.floor(Math.random() * (maxWidth -  0 ) + 0);
-    const y = Math.floor(Math.random() * (maxHeight - 0 ) + 0);
-    console.log('maxHeight Left: ', maxHeight);
-    console.log('Left y:  ', y);
-    console.log('Left X:  ', x);
+    const x = Math.floor(Math.random() * (maxWidth - 0) + 0);
+    const y = Math.floor(Math.random() * (maxHeight - 0) + 0);
+    //console.log("Image Width Left: ", imageWidth);
+    //console.log("Image Height Left: ", imageHeight);
+    //console.log("max Height Left: ", maxHeight);
+    // console.log("min Width Left: ", minWidth);
+    //console.log("max Width Left: ", maxWidth);
+    //  console.log("Left y:  ", y);
+    // console.log("Left X:  ", x);
     return { x, y };
   }
 
@@ -69,34 +70,39 @@ const Frontcarousel = () => {
     let maxHeight = 0;
 
     if (window.innerWidth <= 768) {
-      minWidth = window.innerWidth;
+      minWidth = 0;
       maxWidth = window.innerWidth - imageWidth; // Subtract image width
-      minHeight = (window.innerHeight / 2) - imageHeight; // Subtract image height
-      maxHeight = (window.innerHeight) - imageHeight; // Subtract image height
-    }
-    else {
+      minHeight = window.innerHeight / 2; // Subtract image height
+      maxHeight = window.innerHeight - imageHeight; // Subtract image height
+    } else {
       minWidth = window.innerWidth / 2;
       maxWidth = window.innerWidth - imageWidth; // Subtract image width
       maxHeight = window.innerHeight - imageHeight; // Subtract image height
     }
 
-    //console.warn('imageWidth: ',imageWidth);
-    //console.warn('imageHeight: ',imageHeight);
-    //console.warn('minWidth: ',minWidth);
-    //console.warn('maxWidth: ',maxWidth);
-    console.log('maxHeight Right: ', maxHeight);
+    console.log("imageWidth Right: ", imageWidth);
+    console.log("imageHeight Right: ", imageHeight);
+    console.log("minWidth Right: ", minWidth);
+    console.log("maxWidth Right: ", maxWidth);
+    console.log("maxHeight Right: ", maxHeight);
 
-    const x = Math.floor(parseInt(Math.random() * (maxWidth - minWidth) + minWidth));
-    const y = Math.floor(parseInt(Math.random() * (maxHeight - minHeight) + minHeight));
+    const x = Math.floor(
+      parseInt(Math.random() * (maxWidth - minWidth) + minWidth)
+    );
+    const y = Math.floor(
+      parseInt(Math.random() * (maxHeight - minHeight) + minHeight)
+    );
     //console.warn('x: ',x);
-    console.log('Right y:  ', y);
-    console.log('Right X:  ', x);
+    console.log("Right y:  ", y);
+    console.log("Right X:  ", x);
 
     return { x, y };
   }
 
-  const [frontcurrentImageIndexLeft, setFrontCurrentImageIndexLeft] = useState(5);
-  const [frontcurrentImageIndexRight, setFrontCurrentImageIndexRight] = useState(5);
+  const [frontcurrentImageIndexLeft, setFrontCurrentImageIndexLeft] =
+    useState(5);
+  const [frontcurrentImageIndexRight, setFrontCurrentImageIndexRight] =
+    useState(5);
   const [positionLeft, setPositionLeft] = useState(getRandomPositionleft());
   const [positionRight, setPositionRight] = useState(getRandomPositionright());
 
