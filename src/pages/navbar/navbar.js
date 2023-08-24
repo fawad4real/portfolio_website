@@ -14,10 +14,10 @@ const navbar = ({ onNavbarTagClick }) => {
                 Subscribe
               </NavLink>
               <NavLink
-                onClick={() => onNavbarTagClick('ethos')}
-                to="ethos"
+                onClick={() => onNavbarTagClick('about')}
+                to="about"
               >
-                Ethos
+                About
               </NavLink>
               <NavLink
                 onClick={() => onNavbarTagClick('contact')}
