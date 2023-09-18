@@ -27,7 +27,7 @@ export const NowPlaying = () => {
               >
                 <div id="mc_embed_signup_scroll" className="row flex-row justify-content-center">
                   <h2 className="text-center">
-                    Meld je an en wordt als eerste geinformeerd
+                    Meld je aan en wordt als eerste geinformeerd
                   </h2>
 
                   <div className="mc-field-group p-0">

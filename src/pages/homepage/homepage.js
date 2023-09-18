@@ -11,7 +11,7 @@ const Homepage = ({ activeLink }) => {
   const [activeLinkCurrent, setActiveLinkCurrent] = useState(activeLink);
 
   useEffect(() => {
-   // console.log("Active Link Coming From above: ", activeLink);
+    // console.log("Active Link Coming From above: ", activeLink);
     //console.log("Active Link Below: ", activeLinkCurrent);
     setActiveLinkCurrent(activeLink);
     activeLink = "homepage";
@@ -38,9 +38,11 @@ const Homepage = ({ activeLink }) => {
   }, [activeLinkCurrent]); // Make sure to include activeLinkCurrent in the dependency array
 
   const textArray = [
-    '"Codes within codes, subjectivities enfolded in ciphers, 45 revolutions per minute at 24 frames per second, more or less"',
-    '"Cinema that replicates the power, beauty and alienation of Black Music"',
-    '"Stages and moves viewers through several certain knowledges and beliefs of and in some of the gifts, possibilities, and refusals enacted by black culture"',
+    'Cultuur wordt nog steeds gedefinieerd door wat de media projecteert',
+    'Zij die de zwarte cultuur manifesteren proberen een genuanceerde en alomvattende weergave te bieden van de cultuur. ',
+    'Een weergave die de kracht, schoonheid en vervreemding van de zwarte cultuur toont.',
+    'Een weergave van ons verhaal die keer op keer opnieuw verteld moet worden.',
+
   ]; // Your array of strings
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
@@ -66,7 +68,7 @@ const Homepage = ({ activeLink }) => {
         <Frontcarousel />
         {(activeLinkCurrent === "homepage" || "/") && (
           <div className="homepage">
-              <img src={constants.image.logo}  id="hiddenText" className="tneg-logo"/>
+            <img src={constants.image.logo} id="hiddenText" className="tneg-logo" />
             <div className="text">
               <p>{displayText}</p>
             </div>
