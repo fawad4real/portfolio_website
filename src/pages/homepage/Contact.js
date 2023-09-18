@@ -4,7 +4,7 @@ const Contact = () => {
   return (
 <div className='Contactus-wrapper'>
 <Link to="/" id="contact" className="contactUs">
-    <a href="mailto:info@tnge.us">info@tnge.us</a>
+    <a href="mailto:Contact@zwrtnws.nl">Contact@zwrtnws.nl</a>
 </Link>
 </div>
   )

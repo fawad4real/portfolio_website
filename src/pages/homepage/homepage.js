@@ -58,9 +58,7 @@ const Homepage = ({ activeLink }) => {
       return () => clearInterval(intervalId);
     }
   });
-  const handleClickContact = () => {
-    setActiveLinkCurrent("homepage");
-  };
+
   return (
     <div id="homepage">
       <div className="app">
@@ -77,7 +75,7 @@ const Homepage = ({ activeLink }) => {
         <Routes>
           <Route path="/subscribe" element={<NowPlaying />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/ethos" element={<Ethos />} />
+          <Route path="/about" element={<Ethos />} />
         </Routes>
       </div>
     </div>
