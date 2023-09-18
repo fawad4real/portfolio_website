@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 const navbar = ({ onNavbarTagClick }) => {
   return (
     <div id="navbar" className="py-3">
-      <div className="container  h-100">
+      <div className="container" style={{height:85+"vh"}}>
         <div className="row h-100 align-items-center flex-column">
           <div className="col">
             <div className="d-flex align-items-center justify-content-evenly">
